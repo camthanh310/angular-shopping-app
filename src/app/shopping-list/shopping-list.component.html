@@ -1,0 +1,16 @@
+<div>
+    <app-shopping-edit (ingredientAdded)="onIngredientAdded($event)">
+    </app-shopping-edit>
+
+    <div class="border-b border-gray-500 my-4"></div>
+
+    <div class="bg-white shadow sm:rounded">
+        <ul class="divide-y divide-gray-200">
+            <li *ngFor="let ingredient of ingredients">
+                <a class="block cursor-pointer px-4 py-4 sm:px-6">
+                    {{ ingredient.name }} ({{ ingredient.amount }})
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>

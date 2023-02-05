@@ -1,0 +1,33 @@
+<div class="space-y-4">
+    <div>
+        <img [src]="recipe.imagePath" class="max-h-52" />
+    </div>
+
+    <div>
+        <h1>{{ recipe.name }}</h1>
+    </div>
+
+    <div>
+        <div class="relative inline-block text-left">
+            <div>
+                <button class="text-base px-4 py-2 text-white rounded bg-blue-500" type="button">
+                    Manage Recipe
+                </button>
+            </div>
+
+            <div class="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <a href="#" class="block px-4 py-2 text-sm">Add Ingredients to Shopping List</a>
+                <a href="#" class="block px-4 py-2 text-sm">Edit Recipe</a>
+                <a href="#" class="block px-4 py-2 text-sm">Delete Recipe</a>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        {{ recipe.description }}
+    </div>
+
+    <div>
+        Ingredients
+    </div>
+</div>
