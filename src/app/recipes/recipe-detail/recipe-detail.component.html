@@ -15,8 +15,8 @@
                 </button>
             </div>
 
-            <div class="absolute right-0 z-10 mt-2 w-64 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <a href="#" class="block px-4 py-2 text-sm">Add Ingredients to Shopping List</a>
+            <div class="absolute right-0 z-10 mt-2 w-52 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <a class="block px-4 py-2 text-sm cursor-pointer" (click)="onAddToShoppingList()">To Shopping List</a>
                 <a href="#" class="block px-4 py-2 text-sm">Edit Recipe</a>
                 <a href="#" class="block px-4 py-2 text-sm">Delete Recipe</a>
             </div>
@@ -27,7 +27,13 @@
         {{ recipe.description }}
     </div>
 
-    <div>
-        Ingredients
+    <div class="mt-5 bg-white shadow sm:rounded">
+        <ul class="divide-y divide-gray-200">
+            <li *ngFor="let ingredient of recipe.ingredients">
+                <div class="px-4 py-4 sm:px-6">
+                    <h4 class="text-2xl font-bold">{{ ingredient.name }} - {{ ingredient.amount }}</h4>
+                </div>
+            </li>
+        </ul>
     </div>
 </div>

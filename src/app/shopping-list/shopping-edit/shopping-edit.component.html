@@ -7,7 +7,7 @@
                     <input
                         type="text"
                         id="name"
-                        class="block w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="block w-full pl-3 h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         #nameInput
                     />
                 </div>
@@ -18,7 +18,7 @@
                     <input
                         type="number"
                         id="amount"
-                        class="block w-full h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        class="block w-full pl-3 h-10 rounded-md border border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                         #amountInput
                     />
                 </div>
@@ -26,7 +26,7 @@
         </div>
 
         <div class="flex space-x-2">
-            <button type="submit" class="text-base text-white px-4 py-2 bg-green-500" (click)="onAddItem()">Add</button>
+            <button type="button" class="text-base text-white px-4 py-2 bg-green-500" (click)="onAddItem()">Add</button>
             <button type="button" class="text-base text-white px-4 py-2 bg-red-500">Delete Item</button>
             <button type="button" class="text-base text-white px-4 py-2 bg-blue-500">Clear</button>
         </div>
