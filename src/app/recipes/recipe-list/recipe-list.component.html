@@ -1,5 +1,5 @@
 <div>
-    <button class="text-base py-2 px-4 bg-green-500 text-white rounded">
+    <button class="text-base py-2 px-4 bg-green-500 text-white rounded" (click)="onNewRecipe()">
         New Recipe
     </button>
 </div>
@@ -7,8 +7,9 @@
 <div class="mt-5 bg-white shadow sm:rounded">
     <ul class="divide-y divide-gray-200">
         <app-recipe-item
-            *ngFor="let recipeEl of recipes"
-            [recipe]="recipeEl"
+            *ngFor="let recipe of recipes; let i = index"
+            [recipe]="recipe"
+            [index]="i"
         >
         </app-recipe-item>
     </ul>
