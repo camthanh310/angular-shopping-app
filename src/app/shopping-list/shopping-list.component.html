@@ -5,8 +5,11 @@
 
     <div class="bg-white shadow sm:rounded">
         <ul class="divide-y divide-gray-200">
-            <li *ngFor="let ingredient of ingredients">
-                <a class="block cursor-pointer px-4 py-4 sm:px-6">
+            <li *ngFor="let ingredient of ingredients; let i = index">
+                <a
+                    class="block cursor-pointer px-4 py-4 sm:px-6"
+                    (click)="onEditItem(i)"
+                >
                     {{ ingredient.name }} ({{ ingredient.amount }})
                 </a>
             </li>
