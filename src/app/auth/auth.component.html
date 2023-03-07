@@ -1,0 +1,64 @@
+<div class="flex flex-col min-h-full justify-center py-12 sm:px-6 lg:px-8">
+    <div class="sm:mx-auto sm:w-full sm:max-w-md">
+        <div class="text-white p-5 bg-red-500 mb-3" *ngIf="error">
+            <p>{{ error }}</p>
+        </div>
+        <div *ngIf="isLoading" class="flex justify-center">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10" *ngIf="!isLoading">
+            <form
+                #authForm="ngForm"
+                (ngSubmit)="onSubmit(authForm)"
+                class="space-y-6"
+            >
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">
+                        Email
+                    </label>
+                    <div class="mt-1">
+                        <input
+                            type="email"
+                            id="email"
+                            ngModel
+                            name="email"
+                            required
+                            email
+                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                </div>
+                <div>
+                    <label for="password">Password</label>
+                    <div class="mt-1">
+                        <input
+                            type="password"
+                            id="password"
+                            ngModel
+                            name="password"
+                            required
+                            minlength="6"
+                            class="block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
+                        />
+                    </div>
+                </div>
+                <div class="flex items-center justify-between">
+                    <button
+                        type="submit"
+                        [disabled]="!authForm.valid"
+                        class="rounded text-base text-white px-4 py-2 bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                        {{ isLoginMode ? 'Login' : 'Sign Up' }}
+                    </button>
+                    <button
+                        type="button"
+                        (click)="onSwitchMode()"
+                        class="rounded text-base text-white bg-blue-500 px-4 py-2"
+                    >
+                        Switch to {{ isLoginMode ? 'Sign Up' : 'Login' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -13,6 +13,13 @@
                             Recipes
                         </a>
                         <a
+                            routerLink="/auth"
+                            class="text-sm font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75 px-3 py-2 rounded-md"
+                            routerLinkActive="bg-indigo-700"
+                        >
+                            Authenticate
+                        </a>
+                        <a
                             routerLink="/shopping-list"
                             class="text-sm font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75 px-3 py-2 rounded-md"
                             routerLinkActive="bg-indigo-700"
@@ -32,9 +39,19 @@
                             </button>
                         </div>
 
-                        <div class="hidden absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <a class="block px-4 py-2 text-sm cursor-pointer">Save Data</a>
-                            <a class="block px-4 py-2 text-sm cursor-pointer">Fetch Data</a>
+                        <div class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <button
+                              class="block px-4 py-2 text-sm cursor-pointer"
+                              (click)="onSaveData()"
+                            >
+                                Save Data
+                            </button>
+                            <button
+                              class="block px-4 py-2 text-sm cursor-pointer"
+                              (click)="onFetchData()"
+                            >
+                                Fetch Data
+                            </button>
                         </div>
                     </div>
                 </div>

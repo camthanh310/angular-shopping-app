@@ -8,28 +8,34 @@ import { Recipe } from "./recipe.model";
 export class RecipeService {
     recipesChanged = new Subject<Recipe[]>()
 
-    private recipes: Recipe[] = [
-        new Recipe(
-            'Tasty Schnitze',
-            'This is simply a test',
-            'https://www.clipartmax.com/png/small/362-3624236_icon-preset-recipe-icon.png',
-            [
-                new Ingredient('Meat', 1),
-                new Ingredient('French Fries', 20)
-            ]
-        ),
-        new Recipe(
-            'Big Fat Burger',
-            'This is simply a test',
-            'https://www.clipartmax.com/png/small/362-3624236_icon-preset-recipe-icon.png',
-            [
-                new Ingredient('Buns', 2),
-                new Ingredient('Meat', 1)
-            ]
-        )
-    ]
+    // private recipes: Recipe[] = [
+    //     new Recipe(
+    //         'Tasty Schnitze',
+    //         'This is simply a test',
+    //         'https://www.clipartmax.com/png/small/362-3624236_icon-preset-recipe-icon.png',
+    //         [
+    //             new Ingredient('Meat', 1),
+    //             new Ingredient('French Fries', 20)
+    //         ]
+    //     ),
+    //     new Recipe(
+    //         'Big Fat Burger',
+    //         'This is simply a test',
+    //         'https://www.clipartmax.com/png/small/362-3624236_icon-preset-recipe-icon.png',
+    //         [
+    //             new Ingredient('Buns', 2),
+    //             new Ingredient('Meat', 1)
+    //         ]
+    //     )
+    // ]
+    private recipes: Recipe[] = []
 
     constructor(private shoppingListService: ShoppingListService) { }
+
+    setRecipes(recipes: Recipe[]) {
+        this.recipes = recipes
+        this.recipesChanged.next(this.recipes.slice())
+    }
 
     getRecipes(): Recipe[] {
         return this.recipes.slice()
