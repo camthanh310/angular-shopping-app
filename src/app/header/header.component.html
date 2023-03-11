@@ -9,6 +9,7 @@
                             routerLink="/recipes"
                             class="text-sm font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75 px-3 py-2 rounded-md"
                             routerLinkActive="bg-indigo-700"
+                            *ngIf="isAuthenticated"
                         >
                             Recipes
                         </a>
@@ -16,6 +17,7 @@
                             routerLink="/auth"
                             class="text-sm font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75 px-3 py-2 rounded-md"
                             routerLinkActive="bg-indigo-700"
+                            *ngIf="!isAuthenticated"
                         >
                             Authenticate
                         </a>
@@ -30,8 +32,14 @@
                 </div>
             </div>
 
-            <div class="hidden md:block">
+            <div class="hidden md:block" *ngIf="isAuthenticated">
                 <div class="ml-4 flex items-center md:ml-6">
+                    <button
+                        class="text-sm font-medium text-white hover:bg-indigo-500 hover:bg-opacity-75 px-3 py-2 rounded-md"
+                    >
+                        Logout
+                    </button>
+
                     <div class="relative ml-3">
                         <div>
                             <button appDropdown type="button" class="flex max-w-xs items-center rounded-full text-white hover:text-indigo-50">

@@ -22,7 +22,6 @@ export class DataStorageService {
     }
 
     fetchRecipes() {
-        console.log('good job man');
         return this.http.get<Recipe[]>('http://localhost:8000/api/recipes')
             .pipe(
                 map(recipes => {
@@ -36,7 +35,6 @@ export class DataStorageService {
                 tap(recipes => {
                     this.recipeService.setRecipes(recipes)
                 })
-            )
-
+        )
     }
 }

@@ -1,11 +1,12 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { catchError, switchMap, throwError } from "rxjs";
+import { catchError, Subject, switchMap, tap, throwError } from "rxjs";
+import { User } from "./user.model";
 
 export interface AuthResponseData {
-    name: string
-    id: number
-    email: string
+    name?: string
+    id?: number
+    email?: string
 }
 
 export interface LoginResponseData {
@@ -14,6 +15,8 @@ export interface LoginResponseData {
 
 @Injectable()
 export class AuthService {
+    user = new Subject<User>()
+
     constructor(private http: HttpClient) {}
 
     getCsrfCookie() {
@@ -29,19 +32,10 @@ export class AuthService {
                         password: password
                     }
                 ).pipe(
-                    catchError(
-                        e => {
-                            let message = 'An unknown error occurred!'
-
-                            if (!e.error || !e.error.message) {
-                                return throwError(() => message)
-                            }
-
-                            return throwError(() => e.error.message)
-                        }
-                    )
+                    catchError(this.handleError),
                 )
-            )
+            ),
+            switchMap(() => this.login(email, password))
         )
     }
 
@@ -53,8 +47,39 @@ export class AuthService {
                         email: email,
                         password: password
                     }
+                ).pipe(
+                    catchError(this.handleError)
                 )
-            )
+            ),
+            switchMap(() => this.getUser())
         )
+
+    }
+
+    getUser() {
+        return this.http.get<AuthResponseData>('http://localhost:8000/api/user')
+                .pipe(
+                    catchError(this.handleError),
+                    tap(
+                        resData => {
+                            this.handleAuthentication(resData.email, resData.id, resData.name)
+                        }
+                    )
+                )
+    }
+
+    private handleAuthentication(email?: string, userId?: number, name?: string) {
+        const user = new User(email, userId, name)
+        this.user.next(user)
+    }
+
+    private handleError(errorResponse: HttpErrorResponse) {
+        let message = 'An unknown error occurred!'
+
+        if (!errorResponse.error || !errorResponse.error.message) {
+            return throwError(() => message)
+        }
+
+        return throwError(() => errorResponse.error.message)
     }
 }
