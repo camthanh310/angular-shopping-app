@@ -24,6 +24,7 @@ import { AuthService } from './auth/auth.service';
 import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import { XsrfTokenInterceptorService } from './shared/xsrf-token-interceptor.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthenticationIntereceptorService } from './auth/authentication-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,11 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
+      multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthenticationIntereceptorService,
       multi: true
     },
     ShoppingListService,
