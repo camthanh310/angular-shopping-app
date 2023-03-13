@@ -5,7 +5,6 @@ import {
   BehaviorSubject,
   catchError,
   exhaustMap,
-  pipe,
   switchMap,
   tap,
   throwError,
@@ -96,6 +95,8 @@ export class AuthService {
 
     if (!errorResponse.error || !errorResponse.error.message) {
       return throwError(() => message);
+    } else if ([401].includes(errorResponse.status)) {
+      return throwError(() => errorResponse.status);
     }
 
     return throwError(() => errorResponse.error.message);
