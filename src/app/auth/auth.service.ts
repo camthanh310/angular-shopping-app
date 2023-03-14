@@ -5,7 +5,6 @@ import {
   BehaviorSubject,
   catchError,
   exhaustMap,
-  switchMap,
   tap,
   throwError,
 } from 'rxjs';
@@ -33,7 +32,7 @@ export class AuthService {
 
   signup(email: string, password: string) {
     return this.getCsrfCookie().pipe(
-      switchMap(() =>
+      exhaustMap(() =>
         this.http
           .post<AuthResponseData>('http://localhost:8000/api/register', {
             email: email,
@@ -41,13 +40,13 @@ export class AuthService {
           })
           .pipe(catchError(this.handleError))
       ),
-      switchMap(() => this.login(email, password))
+      exhaustMap(() => this.login(email, password))
     );
   }
 
   login(email: string, password: string) {
     return this.getCsrfCookie().pipe(
-      switchMap(() =>
+      exhaustMap(() =>
         this.http
           .post<LoginResponseData>('http://localhost:8000/api/login', {
             email: email,
@@ -55,7 +54,7 @@ export class AuthService {
           })
           .pipe(catchError(this.handleError))
       ),
-      switchMap(() => this.getUser())
+      exhaustMap(() => this.getUser())
     );
   }
 
