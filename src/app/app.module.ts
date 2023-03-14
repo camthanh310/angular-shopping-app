@@ -25,6 +25,7 @@ import { AuthInterceptorService } from './shared/auth-interceptor.service';
 import { XsrfTokenInterceptorService } from './shared/xsrf-token-interceptor.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthenticationIntereceptorService } from './auth/authentication-interceptor.service';
+import { AuthGuard } from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { AuthenticationIntereceptorService } from './auth/authentication-interce
     RecipeService,
     DataStorageService,
     RecipesResolverService,
-    AuthService
+    AuthService,
+    // AuthGuard
   ],
   bootstrap: [AppComponent]
 })

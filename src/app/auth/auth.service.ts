@@ -5,6 +5,7 @@ import {
   BehaviorSubject,
   catchError,
   exhaustMap,
+  take,
   tap,
   throwError,
 } from 'rxjs';
@@ -62,6 +63,7 @@ export class AuthService {
     return this.http
       .get<AuthResponseData>('http://localhost:8000/api/user')
       .pipe(
+        take(1),
         catchError(this.handleError),
         tap((resData) => {
           this.handleAuthentication(resData.email, resData.id, resData.name);
