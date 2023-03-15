@@ -1,22 +1,33 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy, ViewChild } from "@angular/core";
 import { NgForm } from "@angular/forms";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
+import { AlertComponent } from "../shared/alert/alert.component";
+import { PlaceholderDirective } from "../shared/placeholder/placeholder.directive";
 import { AuthResponseData, AuthService, LoginResponseData } from "./auth.service";
 
 @Component({
     selector: 'app-auth',
     templateUrl: './auth.component.html'
 })
-export class AuthComponent {
+export class AuthComponent implements OnDestroy {
     isLoginMode: boolean = true
     isLoading: boolean = false
     error: string = ''
+    @ViewChild(PlaceholderDirective, { static: false }) alertHost!: PlaceholderDirective
+
+    private closeSubscription!: Subscription
 
     constructor(
         private authService: AuthService,
         private router: Router
     ) {}
+
+    ngOnDestroy(): void {
+        if (this.closeSubscription) {
+            this.closeSubscription.unsubscribe()
+        }
+    }
 
     onSwitchMode(): void {
         this.isLoginMode = !this.isLoginMode
@@ -49,6 +60,7 @@ export class AuthComponent {
                     error: (e) => {
                         console.error(e)
                         this.error = e
+                        this.showErrorAlert(e)
                         this.isLoading = false
                     },
                     complete: () => {
@@ -59,5 +71,23 @@ export class AuthComponent {
 
 
         form.reset()
+    }
+
+    onHandleError() {
+        this.error = ''
+    }
+
+    private showErrorAlert(message: string) {
+        const hostViewContainerRef = this.alertHost.viewContainerRef
+        hostViewContainerRef.clear()
+        const componentRef = hostViewContainerRef.createComponent(AlertComponent)
+
+        componentRef.instance.message = message
+        this.closeSubscription = componentRef.instance.close.subscribe(
+            () => {
+                this.closeSubscription.unsubscribe()
+                hostViewContainerRef.clear()
+            }
+        )
     }
 }

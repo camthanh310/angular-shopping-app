@@ -26,6 +26,8 @@ import { XsrfTokenInterceptorService } from './shared/xsrf-token-interceptor.ser
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthenticationIntereceptorService } from './auth/authentication-interceptor.service';
 import { AuthGuard } from './auth/auth.guard';
+import { AlertComponent } from './shared/alert/alert.component';
+import { PlaceholderDirective } from './shared/placeholder/placeholder.directive';
 
 @NgModule({
   declarations: [
@@ -41,7 +43,9 @@ import { AuthGuard } from './auth/auth.guard';
     RecipeStartComponent,
     RecipeEditComponent,
     AuthComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    AlertComponent,
+    PlaceholderDirective
   ],
   imports: [
     BrowserModule,
