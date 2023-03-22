@@ -21,7 +21,9 @@ export interface LoginResponseData {
   two_factor: boolean;
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
   user = new BehaviorSubject<User | null>(null);
 
